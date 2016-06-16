@@ -1,0 +1,355 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BB4852D81D12252B0043366E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB4852D71D12252B0043366E /* Foundation.framework */; };
+		BB4852E21D12252C0043366E /* loadCycript.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB4852E11D12252C0043366E /* loadCycript.mm */; };
+		BB4852EF1D1226960043366E /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB4852EE1D1226960043366E /* JavaScriptCore.framework */; };
+		BB4852F11D1226A30043366E /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BB4852F01D1226A30043366E /* libsqlite3.0.tbd */; };
+		BB4852F31D1226AE0043366E /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BB4852F21D1226AE0043366E /* libstdc++.6.0.9.tbd */; };
+		BB4853401D124FCF0043366E /* Cycript.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB48533F1D124FCF0043366E /* Cycript.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		BB4852D41D12252B0043366E /* loadCycript.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = loadCycript.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB4852D71D12252B0043366E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BB4852DC1D12252C0043366E /* control.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = control.txt; path = Package/DEBIAN/control.txt; sourceTree = "<group>"; };
+		BB4852DD1D12252C0043366E /* control */ = {isa = PBXFileReference; lastKnownFileType = text; name = control; path = Package/DEBIAN/control; sourceTree = "<group>"; };
+		BB4852DF1D12252C0043366E /* PackageVersion.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PackageVersion.plist; sourceTree = "<group>"; };
+		BB4852E01D12252C0043366E /* loadCycript-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "loadCycript-Prefix.pch"; sourceTree = "<group>"; };
+		BB4852E11D12252C0043366E /* loadCycript.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = loadCycript.mm; sourceTree = "<group>"; };
+		BB4852E61D12252C0043366E /* loadCycript.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = loadCycript.plist; path = Package/Library/MobileSubstrate/DynamicLibraries/loadCycript.plist; sourceTree = "<group>"; };
+		BB4852EE1D1226960043366E /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		BB4852F01D1226A30043366E /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		BB4852F21D1226AE0043366E /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		BB48533F1D124FCF0043366E /* Cycript.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Cycript.framework; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BB4852D01D12252B0043366E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB4852F31D1226AE0043366E /* libstdc++.6.0.9.tbd in Frameworks */,
+				BB4852F11D1226A30043366E /* libsqlite3.0.tbd in Frameworks */,
+				BB4852EF1D1226960043366E /* JavaScriptCore.framework in Frameworks */,
+				BB4853401D124FCF0043366E /* Cycript.framework in Frameworks */,
+				BB4852D81D12252B0043366E /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BB4852CA1D12252B0043366E = {
+			isa = PBXGroup;
+			children = (
+				BB4852D91D12252C0043366E /* loadCycript */,
+				BB4852D61D12252B0043366E /* Frameworks */,
+				BB4852D51D12252B0043366E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BB4852D51D12252B0043366E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BB4852D41D12252B0043366E /* loadCycript.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BB4852D61D12252B0043366E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BB48533F1D124FCF0043366E /* Cycript.framework */,
+				BB4852F21D1226AE0043366E /* libstdc++.6.0.9.tbd */,
+				BB4852F01D1226A30043366E /* libsqlite3.0.tbd */,
+				BB4852EE1D1226960043366E /* JavaScriptCore.framework */,
+				BB4852D71D12252B0043366E /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BB4852D91D12252C0043366E /* loadCycript */ = {
+			isa = PBXGroup;
+			children = (
+				BB4852E11D12252C0043366E /* loadCycript.mm */,
+				BB4852DA1D12252C0043366E /* Package */,
+				BB4852DE1D12252C0043366E /* Supporting Files */,
+			);
+			path = loadCycript;
+			sourceTree = "<group>";
+		};
+		BB4852DA1D12252C0043366E /* Package */ = {
+			isa = PBXGroup;
+			children = (
+				BB4852DB1D12252C0043366E /* DEBIAN */,
+				BB4852E31D12252C0043366E /* Library */,
+			);
+			name = Package;
+			sourceTree = "<group>";
+		};
+		BB4852DB1D12252C0043366E /* DEBIAN */ = {
+			isa = PBXGroup;
+			children = (
+				BB4852DC1D12252C0043366E /* control.txt */,
+				BB4852DD1D12252C0043366E /* control */,
+			);
+			name = DEBIAN;
+			sourceTree = "<group>";
+		};
+		BB4852DE1D12252C0043366E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BB4852DF1D12252C0043366E /* PackageVersion.plist */,
+				BB4852E01D12252C0043366E /* loadCycript-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BB4852E31D12252C0043366E /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				BB4852E41D12252C0043366E /* MobileSubstrate */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		BB4852E41D12252C0043366E /* MobileSubstrate */ = {
+			isa = PBXGroup;
+			children = (
+				BB4852E51D12252C0043366E /* DynamicLibraries */,
+			);
+			name = MobileSubstrate;
+			sourceTree = "<group>";
+		};
+		BB4852E51D12252C0043366E /* DynamicLibraries */ = {
+			isa = PBXGroup;
+			children = (
+				BB4852E61D12252C0043366E /* loadCycript.plist */,
+			);
+			name = DynamicLibraries;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		BB4852D11D12252B0043366E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		BB4852D31D12252B0043366E /* loadCycript */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BB4852E91D12252C0043366E /* Build configuration list for PBXNativeTarget "loadCycript" */;
+			buildPhases = (
+				BB4852CF1D12252B0043366E /* Sources */,
+				BB4852D01D12252B0043366E /* Frameworks */,
+				BB4852D11D12252B0043366E /* Headers */,
+				BB4852D21D12252B0043366E /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = loadCycript;
+			productName = loadCycript;
+			productReference = BB4852D41D12252B0043366E /* loadCycript.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BB4852CB1D12252B0043366E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				TargetAttributes = {
+					BB4852D31D12252B0043366E = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 952J324HNJ;
+					};
+				};
+			};
+			buildConfigurationList = BB4852CE1D12252B0043366E /* Build configuration list for PBXProject "loadCycript" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = BB4852CA1D12252B0043366E;
+			productRefGroup = BB4852D51D12252B0043366E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BB4852D31D12252B0043366E /* loadCycript */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BB4852D21D12252B0043366E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/opt/iOSOpenDev/bin/iosod --xcbp";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BB4852CF1D12252B0043366E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB4852E21D12252C0043366E /* loadCycript.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		BB4852E71D12252C0043366E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(iOSOpenDevPath)/frameworks/**",
+					"$(SDKROOT)/System/Library/PrivateFrameworks",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(iOSOpenDevPath)/include/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LIBRARY_SEARCH_PATHS = "$(iOSOpenDevPath)/lib/**";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = NO;
+				iOSOpenDevPath = /opt/iOSOpenDev;
+			};
+			name = Debug;
+		};
+		BB4852E81D12252C0043366E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(iOSOpenDevPath)/frameworks/**",
+					"$(SDKROOT)/System/Library/PrivateFrameworks",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(iOSOpenDevPath)/include/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LIBRARY_SEARCH_PATHS = "$(iOSOpenDevPath)/lib/**";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				iOSOpenDevPath = /opt/iOSOpenDev;
+			};
+			name = Release;
+		};
+		BB4852EA1D12252C0043366E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "loadCycript/loadCycript-Prefix.pch";
+				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				iOSOpenDevBuildPackageOnAnyBuild = NO;
+				iOSOpenDevCopyOnBuild = NO;
+				iOSOpenDevDevice = "";
+				iOSOpenDevInstallOnAnyBuild = NO;
+				iOSOpenDevInstallOnProfiling = YES;
+				iOSOpenDevRespringOnInstall = YES;
+				iOSOpenDevUsePackageVersionPList = YES;
+			};
+			name = Debug;
+		};
+		BB4852EB1D12252C0043366E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "loadCycript/loadCycript-Prefix.pch";
+				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				iOSOpenDevBuildPackageOnAnyBuild = NO;
+				iOSOpenDevCopyOnBuild = NO;
+				iOSOpenDevDevice = "";
+				iOSOpenDevInstallOnAnyBuild = NO;
+				iOSOpenDevInstallOnProfiling = YES;
+				iOSOpenDevRespringOnInstall = YES;
+				iOSOpenDevUsePackageVersionPList = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BB4852CE1D12252B0043366E /* Build configuration list for PBXProject "loadCycript" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB4852E71D12252C0043366E /* Debug */,
+				BB4852E81D12252C0043366E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BB4852E91D12252C0043366E /* Build configuration list for PBXNativeTarget "loadCycript" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB4852EA1D12252C0043366E /* Debug */,
+				BB4852EB1D12252C0043366E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BB4852CB1D12252B0043366E /* Project object */;
+}
