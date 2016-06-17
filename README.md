@@ -259,11 +259,12 @@ PrivateFramework directory not found: /Applications/Xcode.app/Contents/Developer
 ```
 
 解决办法：
-1. 在[这里](https://jbdevs.org/sdks/)下载9.2的SDK。
-2. 解压后放到/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs。
-3. 你可以把9.2里面的PrivateFrameworks文件夹复制到9.3对应的位置里path/to/iPhoneOS9.3.sdk/System/Library/。
-4. 或者是修改/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Info.plist文件，将`MinimumSDKVersion`改为9.2。
-5. 再次运行`sudo ./iod-setup sdk -sdk iphoneos`命令。
+
+    1. 在[这里](https://jbdevs.org/sdks/)下载9.2的SDK。
+    2. 解压后放到/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs。
+    3. 你可以把9.2里面的PrivateFrameworks文件夹复制到9.3对应的位置里path/to/iPhoneOS9.3.sdk/System/Library/。
+    4. 或者是修改/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Info.plist文件，将`MinimumSDKVersion`改为9.2。
+    5. 再次运行`sudo ./iod-setup sdk -sdk iphoneos`命令。
 
 ![iOSOpenDev](Screenshot/iOSOpenDev.png)
 
