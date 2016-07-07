@@ -1,0 +1,391 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BBDB00031D2EF8B60096EB26 /* Cycript_Reveal.mm in Sources */ = {isa = PBXBuildFile; fileRef = BBDB00021D2EF8B60096EB26 /* Cycript_Reveal.mm */; };
+		BBDB000E1D2EFA1B0096EB26 /* Cycript.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBDB000D1D2EFA1B0096EB26 /* Cycript.framework */; };
+		BBDB00101D2EFA370096EB26 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBDB000F1D2EFA370096EB26 /* JavaScriptCore.framework */; };
+		BBDB00121D2EFA500096EB26 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BBDB00111D2EFA500096EB26 /* libsqlite3.0.tbd */; };
+		BBDB00141D2EFA5A0096EB26 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BBDB00131D2EFA5A0096EB26 /* libstdc++.6.0.9.tbd */; };
+		BBDB00181D2EFB070096EB26 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBDB00171D2EFB070096EB26 /* UIKit.framework */; };
+		BBDB001A1D2EFB170096EB26 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBDB00191D2EFB160096EB26 /* CoreGraphics.framework */; };
+		BBDB001C1D2EFB240096EB26 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBDB001B1D2EFB240096EB26 /* CFNetwork.framework */; };
+		BBDB001E1D2EFB2C0096EB26 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBDB001D1D2EFB2C0096EB26 /* QuartzCore.framework */; };
+		BBDB00201D2EFB3F0096EB26 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BBDB001F1D2EFB3F0096EB26 /* libz.tbd */; };
+		BBDBFFF91D2EF8B60096EB26 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBDBFFF81D2EF8B60096EB26 /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		BBDB00001D2EF8B60096EB26 /* PackageVersion.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PackageVersion.plist; sourceTree = "<group>"; };
+		BBDB00011D2EF8B60096EB26 /* Cycript-Reveal-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cycript-Reveal-Prefix.pch"; sourceTree = "<group>"; };
+		BBDB00021D2EF8B60096EB26 /* Cycript_Reveal.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Cycript_Reveal.mm; sourceTree = "<group>"; };
+		BBDB00071D2EF8B60096EB26 /* Cycript_Reveal.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Cycript_Reveal.plist; path = Package/Library/MobileSubstrate/DynamicLibraries/Cycript_Reveal.plist; sourceTree = "<group>"; };
+		BBDB000D1D2EFA1B0096EB26 /* Cycript.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Cycript.framework; sourceTree = "<group>"; };
+		BBDB000F1D2EFA370096EB26 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		BBDB00111D2EFA500096EB26 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		BBDB00131D2EFA5A0096EB26 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		BBDB00151D2EFAEB0096EB26 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
+		BBDB00171D2EFB070096EB26 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		BBDB00191D2EFB160096EB26 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		BBDB001B1D2EFB240096EB26 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		BBDB001D1D2EFB2C0096EB26 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		BBDB001F1D2EFB3F0096EB26 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		BBDBFFF51D2EF8B60096EB26 /* Cycript-Reveal.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "Cycript-Reveal.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBDBFFF81D2EF8B60096EB26 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BBDBFFFD1D2EF8B60096EB26 /* control.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = control.txt; path = Package/DEBIAN/control.txt; sourceTree = "<group>"; };
+		BBDBFFFE1D2EF8B60096EB26 /* control */ = {isa = PBXFileReference; lastKnownFileType = text; name = control; path = Package/DEBIAN/control; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BBDBFFF11D2EF8B60096EB26 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BBDB00201D2EFB3F0096EB26 /* libz.tbd in Frameworks */,
+				BBDB001E1D2EFB2C0096EB26 /* QuartzCore.framework in Frameworks */,
+				BBDB001C1D2EFB240096EB26 /* CFNetwork.framework in Frameworks */,
+				BBDB001A1D2EFB170096EB26 /* CoreGraphics.framework in Frameworks */,
+				BBDB00181D2EFB070096EB26 /* UIKit.framework in Frameworks */,
+				BBDB00141D2EFA5A0096EB26 /* libstdc++.6.0.9.tbd in Frameworks */,
+				BBDB00121D2EFA500096EB26 /* libsqlite3.0.tbd in Frameworks */,
+				BBDB00101D2EFA370096EB26 /* JavaScriptCore.framework in Frameworks */,
+				BBDBFFF91D2EF8B60096EB26 /* Foundation.framework in Frameworks */,
+				BBDB000E1D2EFA1B0096EB26 /* Cycript.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BBDB00041D2EF8B60096EB26 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				BBDB00051D2EF8B60096EB26 /* MobileSubstrate */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		BBDB00051D2EF8B60096EB26 /* MobileSubstrate */ = {
+			isa = PBXGroup;
+			children = (
+				BBDB00061D2EF8B60096EB26 /* DynamicLibraries */,
+			);
+			name = MobileSubstrate;
+			sourceTree = "<group>";
+		};
+		BBDB00061D2EF8B60096EB26 /* DynamicLibraries */ = {
+			isa = PBXGroup;
+			children = (
+				BBDB00071D2EF8B60096EB26 /* Cycript_Reveal.plist */,
+			);
+			name = DynamicLibraries;
+			sourceTree = "<group>";
+		};
+		BBDBFFEB1D2EF8B60096EB26 = {
+			isa = PBXGroup;
+			children = (
+				BBDBFFFA1D2EF8B60096EB26 /* Cycript-Reveal */,
+				BBDBFFF71D2EF8B60096EB26 /* Frameworks */,
+				BBDBFFF61D2EF8B60096EB26 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BBDBFFF61D2EF8B60096EB26 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BBDBFFF51D2EF8B60096EB26 /* Cycript-Reveal.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BBDBFFF71D2EF8B60096EB26 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BBDB001F1D2EFB3F0096EB26 /* libz.tbd */,
+				BBDB001D1D2EFB2C0096EB26 /* QuartzCore.framework */,
+				BBDB001B1D2EFB240096EB26 /* CFNetwork.framework */,
+				BBDB00191D2EFB160096EB26 /* CoreGraphics.framework */,
+				BBDB00171D2EFB070096EB26 /* UIKit.framework */,
+				BBDB00151D2EFAEB0096EB26 /* Reveal.framework */,
+				BBDB00131D2EFA5A0096EB26 /* libstdc++.6.0.9.tbd */,
+				BBDB00111D2EFA500096EB26 /* libsqlite3.0.tbd */,
+				BBDB000F1D2EFA370096EB26 /* JavaScriptCore.framework */,
+				BBDB000D1D2EFA1B0096EB26 /* Cycript.framework */,
+				BBDBFFF81D2EF8B60096EB26 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BBDBFFFA1D2EF8B60096EB26 /* Cycript-Reveal */ = {
+			isa = PBXGroup;
+			children = (
+				BBDB00021D2EF8B60096EB26 /* Cycript_Reveal.mm */,
+				BBDBFFFB1D2EF8B60096EB26 /* Package */,
+				BBDBFFFF1D2EF8B60096EB26 /* Supporting Files */,
+			);
+			path = "Cycript-Reveal";
+			sourceTree = "<group>";
+		};
+		BBDBFFFB1D2EF8B60096EB26 /* Package */ = {
+			isa = PBXGroup;
+			children = (
+				BBDBFFFC1D2EF8B60096EB26 /* DEBIAN */,
+				BBDB00041D2EF8B60096EB26 /* Library */,
+			);
+			name = Package;
+			sourceTree = "<group>";
+		};
+		BBDBFFFC1D2EF8B60096EB26 /* DEBIAN */ = {
+			isa = PBXGroup;
+			children = (
+				BBDBFFFD1D2EF8B60096EB26 /* control.txt */,
+				BBDBFFFE1D2EF8B60096EB26 /* control */,
+			);
+			name = DEBIAN;
+			sourceTree = "<group>";
+		};
+		BBDBFFFF1D2EF8B60096EB26 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BBDB00001D2EF8B60096EB26 /* PackageVersion.plist */,
+				BBDB00011D2EF8B60096EB26 /* Cycript-Reveal-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		BBDBFFF21D2EF8B60096EB26 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		BBDBFFF41D2EF8B60096EB26 /* Cycript-Reveal */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BBDB000A1D2EF8B60096EB26 /* Build configuration list for PBXNativeTarget "Cycript-Reveal" */;
+			buildPhases = (
+				BBDBFFF01D2EF8B60096EB26 /* Sources */,
+				BBDBFFF11D2EF8B60096EB26 /* Frameworks */,
+				BBDBFFF21D2EF8B60096EB26 /* Headers */,
+				BBDBFFF31D2EF8B60096EB26 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Cycript-Reveal";
+			productName = "Cycript-Reveal";
+			productReference = BBDBFFF51D2EF8B60096EB26 /* Cycript-Reveal.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BBDBFFEC1D2EF8B60096EB26 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0800;
+				TargetAttributes = {
+					BBDBFFF41D2EF8B60096EB26 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 952J324HNJ;
+						DevelopmentTeamName = "Eular Uri (Personal Team)";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = BBDBFFEF1D2EF8B60096EB26 /* Build configuration list for PBXProject "Cycript-Reveal" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = BBDBFFEB1D2EF8B60096EB26;
+			productRefGroup = BBDBFFF61D2EF8B60096EB26 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BBDBFFF41D2EF8B60096EB26 /* Cycript-Reveal */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BBDBFFF31D2EF8B60096EB26 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/opt/iOSOpenDev/bin/iosod --xcbp";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BBDBFFF01D2EF8B60096EB26 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BBDB00031D2EF8B60096EB26 /* Cycript_Reveal.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		BBDB00081D2EF8B60096EB26 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(iOSOpenDevPath)/frameworks/**",
+					"$(SDKROOT)/System/Library/PrivateFrameworks",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(iOSOpenDevPath)/include/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LIBRARY_SEARCH_PATHS = "$(iOSOpenDevPath)/lib/**";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = NO;
+				iOSOpenDevPath = /opt/iOSOpenDev;
+			};
+			name = Debug;
+		};
+		BBDB00091D2EF8B60096EB26 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(iOSOpenDevPath)/frameworks/**",
+					"$(SDKROOT)/System/Library/PrivateFrameworks",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(iOSOpenDevPath)/include/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LIBRARY_SEARCH_PATHS = "$(iOSOpenDevPath)/lib/**";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				iOSOpenDevPath = /opt/iOSOpenDev;
+			};
+			name = Release;
+		};
+		BBDB000B1D2EF8B60096EB26 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Cycript-Reveal/Cycript-Reveal-Prefix.pch";
+				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lz",
+					"-framework",
+					Reveal,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				iOSOpenDevBuildPackageOnAnyBuild = NO;
+				iOSOpenDevCopyOnBuild = NO;
+				iOSOpenDevDevice = "";
+				iOSOpenDevInstallOnAnyBuild = NO;
+				iOSOpenDevInstallOnProfiling = YES;
+				iOSOpenDevRespringOnInstall = YES;
+				iOSOpenDevUsePackageVersionPList = YES;
+			};
+			name = Debug;
+		};
+		BBDB000C1D2EF8B60096EB26 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Cycript-Reveal/Cycript-Reveal-Prefix.pch";
+				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lz",
+					"-framework",
+					Reveal,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				iOSOpenDevBuildPackageOnAnyBuild = NO;
+				iOSOpenDevCopyOnBuild = NO;
+				iOSOpenDevDevice = "";
+				iOSOpenDevInstallOnAnyBuild = NO;
+				iOSOpenDevInstallOnProfiling = YES;
+				iOSOpenDevRespringOnInstall = YES;
+				iOSOpenDevUsePackageVersionPList = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BBDB000A1D2EF8B60096EB26 /* Build configuration list for PBXNativeTarget "Cycript-Reveal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BBDB000B1D2EF8B60096EB26 /* Debug */,
+				BBDB000C1D2EF8B60096EB26 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		BBDBFFEF1D2EF8B60096EB26 /* Build configuration list for PBXProject "Cycript-Reveal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BBDB00081D2EF8B60096EB26 /* Debug */,
+				BBDB00091D2EF8B60096EB26 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BBDBFFEC1D2EF8B60096EB26 /* Project object */;
+}
