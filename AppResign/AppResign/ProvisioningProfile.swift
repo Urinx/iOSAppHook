@@ -12,8 +12,8 @@ struct ProvisioningProfile {
     
     var filename: String,
         name: String,
-        created: NSDate,
-        expires: NSDate,
+        created: Date,
+        expires: Date,
         appID: String,
         teamID: String,
         rawXML: String,
@@ -22,14 +22,14 @@ struct ProvisioningProfile {
     static func getProfiles() -> [ProvisioningProfile] {
         var output: [ProvisioningProfile] = []
         
-        let fileManager = NSFileManager()
-        if let libraryDirectory = fileManager.URLsForDirectory(.LibraryDirectory, inDomains: .UserDomainMask).first, libraryPath = libraryDirectory.path {
+        let fileManager = FileManager()
+        if let libraryDirectory = fileManager.urlsForDirectory(.libraryDirectory, inDomains: .userDomainMask).first, libraryPath = libraryDirectory.path {
             let provisioningProfilesPath = libraryPath.stringByAppendingPathComponent("MobileDevice/Provisioning Profiles") as NSString
             
-            if let provisioningProfiles = try? fileManager.contentsOfDirectoryAtPath(provisioningProfilesPath as String) {
+            if let provisioningProfiles = try? fileManager.contentsOfDirectory(atPath: provisioningProfilesPath as String) {
                 for provFile in provisioningProfiles {
                     if provFile.pathExtension == "mobileprovision" {
-                        let profileFilename = provisioningProfilesPath.stringByAppendingPathComponent(provFile)
+                        let profileFilename = provisioningProfilesPath.appendingPathComponent(provFile)
                         if let profile = ProvisioningProfile(filename: profileFilename) {
                             output.append(profile)
                         }
@@ -44,24 +44,24 @@ struct ProvisioningProfile {
     init?(filename: String){
         let securityArgs = ["cms","-D","-i", filename]
         
-        let taskOutput = NSTask().execute("/usr/bin/security", workingDirectory: nil, arguments: securityArgs)
+        let taskOutput = Task().execute("/usr/bin/security", workingDirectory: nil, arguments: securityArgs)
         if taskOutput.status == 0 {
             self.rawXML = taskOutput.output
             
-            if let results = try? NSPropertyListSerialization.propertyListWithData(taskOutput.output.dataUsingEncoding(NSUTF8StringEncoding)!, options: .Immutable, format: nil) {
+            if let results = try? PropertyListSerialization.propertyList(from: taskOutput.output.data(using: String.Encoding.utf8)!, options: PropertyListSerialization.MutabilityOptions(), format: nil) {
                 
-                if let expirationDate = results.valueForKey("ExpirationDate") as? NSDate,
-                    creationDate = results.valueForKey("CreationDate") as? NSDate,
-                    name = results.valueForKey("Name") as? String,
-                    entitlements = results.valueForKey("Entitlements"),
-                    applicationIdentifier = entitlements.valueForKey("application-identifier") as? String,
-                    periodIndex = applicationIdentifier.characters.indexOf(".") {
+                if let expirationDate = results.value(forKey: "ExpirationDate") as? Date,
+                    creationDate = results.value(forKey: "CreationDate") as? Date,
+                    name = results.value(forKey: "Name") as? String,
+                    entitlements = results.value(forKey: "Entitlements"),
+                    applicationIdentifier = entitlements.value(forKey: "application-identifier") as? String,
+                    periodIndex = applicationIdentifier.characters.index(of: ".") {
                     
                     self.filename = filename
                     self.expires = expirationDate
                     self.created = creationDate
-                    self.appID = applicationIdentifier.substringFromIndex(periodIndex.advancedBy(1))
-                    self.teamID = applicationIdentifier.substringToIndex(periodIndex)
+                    self.appID = applicationIdentifier.substring(from: applicationIdentifier.index(periodIndex, offsetBy: 1))
+                    self.teamID = applicationIdentifier.substring(to: periodIndex)
                     self.name = name
                     self.entitlements = entitlements
                     
@@ -81,11 +81,11 @@ struct ProvisioningProfile {
         }
     }
     
-    func getEntitlementsPlist(tempFolder: String) -> NSString? {
+    func getEntitlementsPlist(_ tempFolder: String) -> NSString? {
         let mobileProvisionPlist = tempFolder.stringByAppendingPathComponent("mobileprovision.plist")
         do {
-            try self.rawXML.writeToFile(mobileProvisionPlist, atomically: false, encoding: NSUTF8StringEncoding)
-            let plistBuddy = NSTask().execute("/usr/libexec/PlistBuddy", workingDirectory: nil, arguments: ["-c", "Print :Entitlements", mobileProvisionPlist, "-x"])
+            try self.rawXML.write(toFile: mobileProvisionPlist, atomically: false, encoding: String.Encoding.utf8)
+            let plistBuddy = Task().execute("/usr/libexec/PlistBuddy", workingDirectory: nil, arguments: ["-c", "Print :Entitlements", mobileProvisionPlist, "-x"])
             if plistBuddy.status == 0 {
                 return plistBuddy.output
             } else {

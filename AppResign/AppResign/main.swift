@@ -23,7 +23,7 @@ func Usage() {
     print("./\(appName) -v xxx.ipa xxx-out.ipa")
 }
 
-func raw_input(prompt: String = "> ") -> String {
+func raw_input(_ prompt: String = "> ") -> String {
     print(prompt, terminator:"")
     var input: String = ""
     
@@ -37,7 +37,7 @@ func raw_input(prompt: String = "> ") -> String {
     }
 }
 
-func mainRoutine(input: String, output: String) {
+func mainRoutine(_ input: String, output: String) {
     let support = ["deb", "ipa", "app", "xcarchive"]
     if support.contains(input.pathExtension) {
         if output.pathExtension == "ipa" {
@@ -99,7 +99,7 @@ func mainRoutine(input: String, output: String) {
             }
             
             // Set app bundle ID
-            if profile!.appID.characters.indexOf("*") == nil {
+            if profile!.appID.characters.index(of: "*") == nil {
                 // Not a wildcard profile
                 appResign.newApplicationID = profile!.appID
                 print("Use default bundle ID: \(profile!.appID)\n")
@@ -126,7 +126,7 @@ func mainRoutine(input: String, output: String) {
             print("[*] Error! \nOnly support output ipa file.")
         }
     } else {
-        print("[*] Error! \nThis tool can only support input file with format: \(support.joinWithSeparator(", ")).")
+        print("[*] Error! \nThis tool can only support input file with format: \(support.joined(separator: ", ")).")
     }
 }
 
