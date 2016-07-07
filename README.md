@@ -4,10 +4,10 @@
 > 注意！本文所有操作均在以下环境下成功进行，不同平台或环境可能存在某些问题，欢迎大家在[issue](https://github.com/Urinx/iOSAppHook/issues)中提出问题以及相互讨论。
 > 
 > Mac OS X 10.11.6 (15G12a) <br>
-> Xcode 7.3.1 (7D1014) <br>
-> iPhone 5s, iOS 9.3.3 (13G21) <br>
+> Xcode 7.3.1 (7D1014) or 8.0 beta (8S128d) <br>
+> iPhone 5s, iOS 9.3.3 (13G21) or iOS 10 (14A5297c) <br>
 > 免费开发者账号 <br>
-> 示例App：微信 v6.3.19.18
+> 示例App：微信 v6.3.21
 
 ## 前言
 提到非越狱环境下`App Hook`大家早就已经耳熟能详，已经有很多大神研究过，这方面相关的资料和文章也能搜到很多。我最早是看到乌云知识库上[蒸米](http://drops.wooyun.org/author/蒸米)的文章才对这方面有所了解，当时就想试试，整个过程看似简单（大神总是一笔带过），然而当自己真正开始动手时一路上遇到各种问题（一脸懵逼），在[iOSRE论坛](http://bbs.iosre.com)上也看到大家遇到的各种问题，其实阻扰大家的主要是一些环境的搭建以及相关配置没设置好，结果导致dylib编译过程各种错误，重签名不成功，各种闪退等。所以本文里的每一步操作都会很详细的交代，确保大家都能操作成功。
@@ -408,8 +408,30 @@ CHConstructor {
 
 注：本文中用到的AppResign重签名工具，以及编译好的loadCycript.dylib可以在[这里](https://github.com/Urinx/iOSAppHook/releases)下载。
 
+## 使用Reveal调试微信的App界面
+Reveal这个调试应用UI界面的神器这里就不再介绍了，本文所有的相关资料都在参考链接里请自行查看。
+
+首先从Reveal应用中找到提供的静态库文件。
+
+![wechat](Screenshot/Reveal0.png)
+
+将`Reveal.framework`从`Build Phase`里面的`Link Binary`里面去掉，然后添加其它的相关依赖库: `UIKit.framework`，`CoreGraphics.framework`，`QuartzCore.framework`，`CFNetwork.framework`，`libz.tbd`。
+
+接着在`Build Settings`里面搜索`Other Linker Flags`，将其设置为：
+```
+-ObjC -lz -framework Reveal
+```
+
+![wechat](Screenshot/Reveal1.png)
+
+接下来编译项目就可以了，你甚至都不用写一句代码。编译好的dylib按照前面说的方法注入到微信App中，打开Reveal应用就可以连接上手机了。
+
+![wechat](Screenshot/Reveal2.png)
+
+注：编译好的Reveal.dylib以及Cycript和Reveal结合的dylib都可以在[这里](https://github.com/Urinx/iOSAppHook/releases)下载。
+
 ## 后续
-至于之后该做什么，你想干嘛就干嘛。Cycript在手，天下我有，你可以使用Class-dump工具dunp出应用的头文件，或者是将二进制文件拖到ida或hopper里面反汇编分析，写tweak插件，实现各种姿势抢红包等等，本文就不讨论这些了。
+至于之后该做什么，你想干嘛就干嘛。Cycript在手，天下我有，Reveal一出，谁与争锋。你可以使用Class-dump工具dunp出应用的头文件，或者是将二进制文件拖到ida或hopper里面反汇编分析，写tweak插件，实现各种姿势抢红包等等，本文就不讨论这些了。
 
 ## 参考链接
 之前看的都没记录，下列都是后来想到才记下来的。
@@ -430,6 +452,12 @@ iOSOpenDev：
 - http://www.aichengxu.com/view/6004431
 - http://bbs.iosre.com/t/xcode7-iosopendev-iosopendev-ios9/1963
 - http://bbs.iosre.com/t/xcode-7-3-ios-9-3-sdk-theos-private-framework/3200
+
+Reveal
+- http://blog.devzeng.com/blog/ios-reveal-integrating.html
+- http://support.revealapp.com/kb/getting-started/integrating-reveal-with-your-ios-app
+- https://github.com/QQVIPTeam/practice-of-ios/issues/10
+- https://hurui.gitbooks.io/reveal-debug/content/noModify.html
 
 其它：
 - http://apple.stackexchange.com/questions/213440/remotely-distribute-an-ios-app-compiled-in-xcode-7-without-app-store-developer
