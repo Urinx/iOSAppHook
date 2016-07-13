@@ -18,9 +18,15 @@ func Usage() {
     print("\nOptions:")
     print("-h \t help")
     print("-v \t verbose mode, print all logs")
+    print("-c \t certificate")
+    print("-p \t provisioning profile")
+    print("-b \t bundle id")
+    print("-n \t display name, '*' means default name")
     print("\nExample:")
     print("./\(appName) xxx.ipa xxx-out.ipa")
     print("./\(appName) -v xxx.ipa xxx-out.ipa")
+    print("./\(appName) -v -c 'iPhone Developer: XXX XXX (ABCDE12345)' -p 'iOS Team Provisioning Profile: com.xxx.xxx (ABCDE12345)' -b 'com.xxx.xxx' -n '*' xxx.ipa xxx-out.ipa")
+    exit(1)
 }
 
 func raw_input(_ prompt: String = "> ") -> String {
@@ -37,7 +43,7 @@ func raw_input(_ prompt: String = "> ") -> String {
     }
 }
 
-func mainRoutine(_ input: String, output: String) {
+func mainRoutine(_ input: String, output: String, certificate: String, provProfile: String, bundleId: String, displayName: String) {
     let support = ["deb", "ipa", "app", "xcarchive"]
     if support.contains(input.pathExtension) {
         if output.pathExtension == "ipa" {
@@ -55,6 +61,18 @@ func mainRoutine(_ input: String, output: String) {
             if n == 1 {
                 appResign.curSigningCert = appResign.codesigningCerts[0]
                 print("Use Certificate: \(appResign.curSigningCert)\n")
+            } else if (!certificate.isEmpty) {
+                for c in appResign.codesigningCerts {
+                    if (c == certificate) {
+                        appResign.curSigningCert = certificate
+                        break
+                    }
+                }
+                if (appResign.curSigningCert.isEmpty) {
+                    print("Can't find certificate: \(certificate)\n")
+                    exit(2)
+                }
+                print("Use Certificate: \(certificate)\n")
             } else {
                 while true {
                     let r = Int(raw_input())
@@ -83,6 +101,20 @@ func mainRoutine(_ input: String, output: String) {
                 appResign.profileFilename = profile!.filename
                 print("Use Profile: \(profile!.name) (\(profile!.teamID))")
                 print("Position: \(profile!.filename)\n")
+            } else if (!provProfile.isEmpty) {
+                for p in appResign.provisioningProfiles {
+                    if ((p.name + " (" + p.teamID + ")") == provProfile) {
+                        profile = p
+                        appResign.profileFilename = profile!.filename
+                        break
+                    }
+                }
+                if (appResign.profileFilename == nil) {
+                    print("Can't find provisioning profile: \(provProfile)\n")
+                    exit(2)
+                }
+                print("Use Profile: \(provProfile)\n")
+                print("Position: \(profile!.filename)\n")
             } else {
                 while true {
                     let r = Int(raw_input())
@@ -103,6 +135,9 @@ func mainRoutine(_ input: String, output: String) {
                 // Not a wildcard profile
                 appResign.newApplicationID = profile!.appID
                 print("Use default bundle ID: \(profile!.appID)\n")
+            } else if (!bundleId.isEmpty) {
+                appResign.newApplicationID = bundleId
+                print("Use bundle ID: \(bundleId)\n")
             } else {
                 let r = raw_input("Set App Bundle ID: ")
                 if !r.isEmpty {
@@ -112,9 +147,18 @@ func mainRoutine(_ input: String, output: String) {
             }
             
             // Set app display name
-            let r = raw_input("Set App Display Name: ")
-            if !r.isEmpty {
-                appResign.newDisplayName = r
+            if (!displayName.isEmpty) {
+                if (displayName == "*") {
+                    print("Use default display name.")
+                } else {
+                    appResign.newDisplayName = displayName
+                    print("Use App Display Name: \(displayName)\n")
+                }
+            } else {
+                let r = raw_input("Set App Display Name: ")
+                if !r.isEmpty {
+                    appResign.newDisplayName = r
+                }
             }
             print("=============================")
             
@@ -130,23 +174,39 @@ func mainRoutine(_ input: String, output: String) {
     }
 }
 
-switch argv.count {
-case 2:
-    if argv[1] == "-h" { Usage() }
-case 3:
-    let input = argv[1]
-    let output = argv[2]
-    mainRoutine(input, output: output)
-case 4:
-    if argv[1] == "-v" {
-        LogMode = true
-        let input = argv[2]
-        let output = argv[3]
-        mainRoutine(input, output: output)
-    }
-default:
+if (argv.count < 3 || argv.count > 12) {
     Usage()
 }
 
+var certificate = ""
+var provProfile = ""
+var bundleId    = ""
+var displayName = ""
+var i = 1
+while (i < argv.count - 2) {
+    switch (argv[i]) {
+        case "-v":
+            LogMode = true
+        case "-c":
+            i += 1
+            certificate = argv[i]
+        case "-p":
+            i += 1
+            provProfile = argv[i]
+        case "-b":
+            i += 1
+            bundleId    = argv[i]
+        case "-n":
+            i += 1
+            displayName = argv[i]
+        default:
+            Usage()
+    }
+    i += 1
+}
+let input  = argv[argv.count - 2]
+let output = argv[argv.count - 1]
+
+mainRoutine(input, output: output, certificate: certificate, provProfile: provProfile, bundleId: bundleId, displayName: displayName)
 
 
