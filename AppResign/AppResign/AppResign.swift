@@ -27,7 +27,7 @@ class AppResign {
     
     //MARK: Constants
     let defaults = UserDefaults()
-    let fileManager = FileManager.default()
+    let fileManager = FileManager.default
     let bundleID = "com.eular.AppResign"
     let arPath = "/usr/bin/ar"
     let mktempPath = "/usr/bin/mktemp"
@@ -51,8 +51,8 @@ class AppResign {
         }
         
         let formatter = DateFormatter()
-        formatter.dateStyle = .shortStyle
-        formatter.timeStyle = .mediumStyle
+        formatter.dateStyle = .short
+        formatter.timeStyle = .medium
         var newProfiles: [ProvisioningProfile] = []
         
         for profile in provisioningProfiles {
@@ -223,7 +223,7 @@ class AppResign {
             for file in files {
                 
                 fileManager.fileExists(atPath: payloadDirectory.stringByAppendingPathComponent(file), isDirectory: &isDirectory)
-                if !isDirectory { continue }
+                if !isDirectory.boolValue { continue }
                 
                 // MARK: Bundle variables setup
                 let appBundlePath = payloadDirectory.stringByAppendingPathComponent(file)
@@ -490,7 +490,7 @@ class AppResign {
             for file in files {
                 let currentFile = path.stringByAppendingPathComponent(file)
                 fileManager.fileExists(atPath: currentFile, isDirectory: &isDirectory)
-                if isDirectory {
+                if isDirectory.boolValue {
                     recursiveDirectorySearch(currentFile, extensions: extensions, found: found)
                 }
                 if extensions.contains(file.pathExtension) {

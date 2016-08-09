@@ -23,7 +23,8 @@ struct ProvisioningProfile {
         var output: [ProvisioningProfile] = []
         
         let fileManager = FileManager()
-        if let libraryDirectory = fileManager.urlsForDirectory(.libraryDirectory, inDomains: .userDomainMask).first, libraryPath = libraryDirectory.path {
+        if let libraryDirectory = fileManager.urls(for: .libraryDirectory, in: .userDomainMask).first {
+            let libraryPath = libraryDirectory.path
             let provisioningProfilesPath = libraryPath.stringByAppendingPathComponent("MobileDevice/Provisioning Profiles") as NSString
             
             if let provisioningProfiles = try? fileManager.contentsOfDirectory(atPath: provisioningProfilesPath as String) {
@@ -46,16 +47,26 @@ struct ProvisioningProfile {
         
         let taskOutput = Task().execute("/usr/bin/security", workingDirectory: nil, arguments: securityArgs)
         if taskOutput.status == 0 {
-            self.rawXML = taskOutput.output
             
-            if let results = try? PropertyListSerialization.propertyList(from: taskOutput.output.data(using: String.Encoding.utf8)!, options: PropertyListSerialization.MutabilityOptions(), format: nil) {
+            // here is a bug on macOS
+            // taskOutput.output has a error info in the first line:
+            // security: SecPolicySetValue: One or more parameters passed to a function were not valid.
+            // the following is dirty fix
+            if taskOutput.output.hasPrefix("security:") {
+                let error_str = "security: SecPolicySetValue: One or more parameters passed to a function were not valid.\n"
+                self.rawXML = taskOutput.output.replacingOccurrences(of: error_str, with: "")
+            } else {
+                self.rawXML = taskOutput.output
+            }
+            
+            if let results = try? PropertyListSerialization.propertyList(from: self.rawXML.data(using: String.Encoding.utf8)!, options: PropertyListSerialization.MutabilityOptions(), format: nil) {
                 
                 if let expirationDate = results.value(forKey: "ExpirationDate") as? Date,
-                    creationDate = results.value(forKey: "CreationDate") as? Date,
-                    name = results.value(forKey: "Name") as? String,
-                    entitlements = results.value(forKey: "Entitlements"),
-                    applicationIdentifier = entitlements.value(forKey: "application-identifier") as? String,
-                    periodIndex = applicationIdentifier.characters.index(of: ".") {
+                    let creationDate = results.value(forKey: "CreationDate") as? Date,
+                    let name = results.value(forKey: "Name") as? String,
+                    let entitlements = results.value(forKey: "Entitlements"),
+                    let applicationIdentifier = entitlements.value(forKey: "application-identifier") as? String,
+                    let periodIndex = applicationIdentifier.characters.index(of: ".") {
                     
                     self.filename = filename
                     self.expires = expirationDate
