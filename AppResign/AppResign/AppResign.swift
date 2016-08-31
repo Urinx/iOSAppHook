@@ -39,6 +39,7 @@ class AppResign {
     let securityPath = "/usr/bin/security"
     let chmodPath = "/bin/chmod"
     let cpPath = "/bin/cp"
+    let plistBuddyPath = "/usr/libexec/PlistBuddy"
     
     init() {
         populateProvisioningProfiles()
@@ -331,11 +332,30 @@ class AppResign {
                 // MARK: Change Display Name
                 if newDisplayName != "" {
                     print("Changing Display Name to \(newDisplayName)")
-                    let displayNameChangeTask = Task().execute(defaultsPath, workingDirectory: nil, arguments: ["write",appBundleInfoPlist,"CFBundleDisplayName", newDisplayName])
+                    
+                    // change CFBundleDisplayName in Info.plist
+                    let displayNameChangeTask = self.setPlistKey(appBundleInfoPlist, keyName: "CFBundleDisplayName", value: newDisplayName)
                     if displayNameChangeTask.status != 0 {
                         Log("Error changing display name")
                         Log(displayNameChangeTask.output)
                         cleanup(tempFolder); return
+                    }
+                    
+                    // change CFBundleDisplayName in InfoPlist.strings in every *.lproj
+                    if let files = try? fileManager.contentsOfDirectory(atPath: appBundlePath) {
+                        for file in files {
+                            if file.pathExtension == "lproj" {
+                                let lprojPath = appBundlePath.stringByAppendingPathComponent(file)
+                                let infoPlistStringsPath = lprojPath.stringByAppendingPathComponent("InfoPlist.strings")
+                                
+                                let lprojDisplayNameChangeTask = self.plistBuddySet(infoPlistStringsPath, keyName: "CFBundleDisplayName", value: newDisplayName)
+                                if lprojDisplayNameChangeTask.status != 0 {
+                                    Log("Error changing display name")
+                                    Log(lprojDisplayNameChangeTask.output)
+                                    cleanup(tempFolder); return
+                                }
+                            }
+                        }
                     }
                 }
                 
@@ -480,6 +500,10 @@ class AppResign {
     
     func setPlistKey(_ plist: String, keyName: String, value: String) -> AppSignerTaskOutput {
         return Task().execute(defaultsPath, workingDirectory: nil, arguments: ["write", plist, keyName, value])
+    }
+    
+    func plistBuddySet(_ plist: String, keyName: String, value: String) -> AppSignerTaskOutput {
+        return Task().execute(plistBuddyPath, workingDirectory: nil, arguments: ["-c", "set :\(keyName) \(value)", plist])
     }
     
     func recursiveDirectorySearch(_ path: String, extensions: [String], found: ((file: String) -> Void)){
