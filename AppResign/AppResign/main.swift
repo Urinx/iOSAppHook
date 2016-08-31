@@ -160,6 +160,13 @@ func mainRoutine(_ input: String, output: String, certificate: String, provProfi
                     appResign.newDisplayName = r
                 }
             }
+            
+            // If delete url schemes
+            let deleteQuery = raw_input("Delete url schemes (y/n): ")
+            if !deleteQuery.isEmpty && deleteQuery == "y" {
+                appResign.deleteURLSchemes = true
+            }
+            
             print("=============================")
             
             // Start signing

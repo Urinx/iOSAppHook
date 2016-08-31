@@ -24,6 +24,7 @@ class AppResign {
     var newDisplayName: String = ""
     var startSize: CGFloat?
     var NibLoaded = false
+    var deleteURLSchemes = false
     
     //MARK: Constants
     let defaults = UserDefaults()
@@ -359,6 +360,10 @@ class AppResign {
                     }
                 }
                 
+                // MARK: Delete URL Schemes
+                if deleteURLSchemes {
+                    let _ = self.plistBuddy(appBundleInfoPlist, command: "delete :CFBundleURLTypes")
+                }
                 
                 func generateFileSignFunc(_ payloadDirectory: String, entitlementsPath: String, signingCertificate: String) -> ( (file: String) -> Void ) {
                     
@@ -504,6 +509,10 @@ class AppResign {
     
     func plistBuddySet(_ plist: String, keyName: String, value: String) -> AppSignerTaskOutput {
         return Task().execute(plistBuddyPath, workingDirectory: nil, arguments: ["-c", "set :\(keyName) \(value)", plist])
+    }
+    
+    func plistBuddy(_ plist: String, command: String) -> AppSignerTaskOutput {
+        return Task().execute(plistBuddyPath, workingDirectory: nil, arguments: ["-c", command, plist])
     }
     
     func recursiveDirectorySearch(_ path: String, extensions: [String], found: ((file: String) -> Void)){
