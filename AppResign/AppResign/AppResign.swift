@@ -71,7 +71,7 @@ class AppResign {
     func populateCodesigningCerts() {
         var output: [String] = []
         
-        let securityResult = Task().execute(securityPath, workingDirectory: nil, arguments: ["find-identity","-v","-p","codesigning"])
+        let securityResult = Process().execute(securityPath, workingDirectory: nil, arguments: ["find-identity","-v","-p","codesigning"])
         if securityResult.output.characters.count >= 1 {
             let rawResult = securityResult.output.components(separatedBy: "\"")
             
@@ -136,11 +136,12 @@ class AppResign {
                 try fileManager.createDirectory(atPath: debPath, withIntermediateDirectories: true, attributes: nil)
                 try fileManager.createDirectory(atPath: workingDirectory, withIntermediateDirectories: true, attributes: nil)
                 print("Extracting deb file")
-                let debTask = Task().execute(arPath, workingDirectory: debPath, arguments: ["-x", inputFile])
+                let debTask = Process().execute(arPath, workingDirectory: debPath, arguments: ["-x", inputFile])
                 Log(debTask.output)
                 if debTask.status != 0 {
                     Log("Error processing deb file")
-                    cleanup(tempFolder); return
+                    cleanup(tempFolder)
+                    return
                 }
                 
                 var tarUnpacked = false
@@ -149,7 +150,7 @@ class AppResign {
                     if fileManager.fileExists(atPath: dataPath){
                         
                         Log("Unpacking data.\(tarFormat)")
-                        let tarTask = Task().execute(tarPath, workingDirectory: debPath, arguments: ["-xf",dataPath])
+                        let tarTask = Process().execute(tarPath, workingDirectory: debPath, arguments: ["-xf",dataPath])
                         Log(tarTask.output)
                         if tarTask.status == 0 {
                             tarUnpacked = true
@@ -234,7 +235,7 @@ class AppResign {
                 let useAppBundleProfile = (provisioningFile == nil && fileManager.fileExists(atPath: appBundleProvisioningFilePath))
                 
                 // MARK: Delete CFBundleResourceSpecification from Info.plist
-                Log(Task().execute(defaultsPath, workingDirectory: nil, arguments: ["delete",appBundleInfoPlist,"CFBundleResourceSpecification"]).output)
+                Log(Process().execute(defaultsPath, workingDirectory: nil, arguments: ["delete",appBundleInfoPlist,"CFBundleResourceSpecification"]).output)
                 
                 // MARK: Copy Provisioning Profile
                 if provisioningFile != nil {
@@ -289,7 +290,7 @@ class AppResign {
                 
                 // MARK: Make sure that the executable is well... executable.
                 if let bundleExecutable = getPlistKey(appBundleInfoPlist, keyName: "CFBundleExecutable"){
-                    _ = Task().execute(chmodPath, workingDirectory: nil, arguments: ["755", appBundlePath.stringByAppendingPathComponent(bundleExecutable)])
+                    _ = Process().execute(chmodPath, workingDirectory: nil, arguments: ["755", appBundlePath.stringByAppendingPathComponent(bundleExecutable)])
                 }
                 
                 // MARK: Change Application ID
@@ -310,7 +311,7 @@ class AppResign {
                                 
                                 _ = setPlistKey(appexPlist, keyName: "CFBundleIdentifier", value: newAppexID)
                             }
-                            if Task().execute(defaultsPath, workingDirectory: nil, arguments: ["read", appexPlist,"WKCompanionAppBundleIdentifier"]).status == 0 {
+                            if Process().execute(defaultsPath, workingDirectory: nil, arguments: ["read", appexPlist,"WKCompanionAppBundleIdentifier"]).status == 0 {
                                 _ = setPlistKey(appexPlist, keyName: "WKCompanionAppBundleIdentifier", value: newApplicationID)
                             }
                             recursiveDirectorySearch(appexFile, extensions: ["app"], found: changeAppexID)
@@ -365,7 +366,7 @@ class AppResign {
                     let _ = self.plistBuddy(appBundleInfoPlist, command: "delete :CFBundleURLTypes")
                 }
                 
-                func generateFileSignFunc(_ payloadDirectory: String, entitlementsPath: String, signingCertificate: String) -> ( (file: String) -> Void ) {
+                func generateFileSignFunc(_ payloadDirectory: String, entitlementsPath: String, signingCertificate: String) -> ( (_ file: String) -> Void ) {
                     
                     let useEntitlements: Bool = ({
                         if fileManager.fileExists(atPath: entitlementsPath) {
@@ -425,10 +426,10 @@ class AppResign {
                 
                 
                 recursiveDirectorySearch(appBundlePath, extensions: signableExtensions, found: signingFunction)
-                signingFunction(file: appBundlePath)
+                signingFunction(appBundlePath)
                 
                 // MARK: Codesigning - Verification
-                let verificationTask = Task().execute(codesignPath, workingDirectory: nil, arguments: ["-v",appBundlePath])
+                let verificationTask = Process().execute(codesignPath, workingDirectory: nil, arguments: ["-v",appBundlePath])
                 if verificationTask.status != 0 {
                     Log("Error verifying code signature")
                     Log(verificationTask.output)
@@ -458,7 +459,7 @@ class AppResign {
             Log("Error packaging IPA")
         }
         
-        let cpTask = Task().execute(cpPath, workingDirectory: nil, arguments: [workingDirectory.stringByAppendingPathComponent(outputFile.lastPathComponent), outputFile])
+        let cpTask = Process().execute(cpPath, workingDirectory: nil, arguments: [workingDirectory.stringByAppendingPathComponent(outputFile.lastPathComponent), outputFile])
         if cpTask.status != 0 {
             Log("Error copy IPA")
         }
@@ -469,7 +470,7 @@ class AppResign {
     }
     
     func makeTempFolder() -> String? {
-        let tempTask = Task().execute(mktempPath, workingDirectory: nil, arguments: ["-d","-t",bundleID])
+        let tempTask = Process().execute(mktempPath, workingDirectory: nil, arguments: ["-d","-t",bundleID])
         if tempTask.status != 0 {
             return nil
         }
@@ -487,15 +488,15 @@ class AppResign {
     }
     
     func unzip(_ inputFile: String, outputPath: String) -> AppSignerTaskOutput {
-        return Task().execute(unzipPath, workingDirectory: nil, arguments: ["-q",inputFile,"-d",outputPath])
+        return Process().execute(unzipPath, workingDirectory: nil, arguments: ["-q",inputFile,"-d",outputPath])
     }
     
     func zip(_ inputPath: String, outputFile: String) -> AppSignerTaskOutput {
-        return Task().execute(zipPath, workingDirectory: inputPath, arguments: ["-qry", outputFile, "."])
+        return Process().execute(zipPath, workingDirectory: inputPath, arguments: ["-qry", outputFile, "."])
     }
     
     func getPlistKey(_ plist: String, keyName: String) -> String? {
-        let currTask = Task().execute(defaultsPath, workingDirectory: nil, arguments: ["read", plist, keyName])
+        let currTask = Process().execute(defaultsPath, workingDirectory: nil, arguments: ["read", plist, keyName])
         if currTask.status == 0 {
             return String(currTask.output.characters.dropLast())
         } else {
@@ -504,18 +505,18 @@ class AppResign {
     }
     
     func setPlistKey(_ plist: String, keyName: String, value: String) -> AppSignerTaskOutput {
-        return Task().execute(defaultsPath, workingDirectory: nil, arguments: ["write", plist, keyName, value])
+        return Process().execute(defaultsPath, workingDirectory: nil, arguments: ["write", plist, keyName, value])
     }
     
     func plistBuddySet(_ plist: String, keyName: String, value: String) -> AppSignerTaskOutput {
-        return Task().execute(plistBuddyPath, workingDirectory: nil, arguments: ["-c", "set :\(keyName) \(value)", plist])
+        return Process().execute(plistBuddyPath, workingDirectory: nil, arguments: ["-c", "set :\(keyName) \(value)", plist])
     }
     
     func plistBuddy(_ plist: String, command: String) -> AppSignerTaskOutput {
-        return Task().execute(plistBuddyPath, workingDirectory: nil, arguments: ["-c", command, plist])
+        return Process().execute(plistBuddyPath, workingDirectory: nil, arguments: ["-c", command, plist])
     }
     
-    func recursiveDirectorySearch(_ path: String, extensions: [String], found: ((file: String) -> Void)){
+    func recursiveDirectorySearch(_ path: String, extensions: [String], found: ((_ file: String) -> Void)){
         
         if let files = try? fileManager.contentsOfDirectory(atPath: path) {
             var isDirectory: ObjCBool = true
@@ -527,7 +528,7 @@ class AppResign {
                     recursiveDirectorySearch(currentFile, extensions: extensions, found: found)
                 }
                 if extensions.contains(file.pathExtension) {
-                    found(file: currentFile)
+                    found(currentFile)
                 }
                 
             }
@@ -535,7 +536,7 @@ class AppResign {
     }
     
     // MARK: Codesigning
-    func codeSign(_ file: String, certificate: String, entitlements: String?,before:((file: String, certificate: String, entitlements: String?)->Void)?, after: ((file: String, certificate: String, entitlements: String?, codesignTask: AppSignerTaskOutput)->Void)?)->AppSignerTaskOutput{
+    func codeSign(_ file: String, certificate: String, entitlements: String?,before:((_ file: String, _ certificate: String, _ entitlements: String?)->Void)?, after: ((_ file: String, _ certificate: String, _ entitlements: String?, _ codesignTask: AppSignerTaskOutput)->Void)?) ->AppSignerTaskOutput{
         
         let useEntitlements: Bool = ({
             if entitlements == nil {
@@ -550,7 +551,7 @@ class AppResign {
         })()
         
         if let beforeFunc = before {
-            beforeFunc(file: file, certificate: certificate, entitlements: entitlements)
+            beforeFunc(file, certificate, entitlements)
         }
         
         var arguments = ["-vvv","-fs",certificate,"--no-strict"]
@@ -559,9 +560,9 @@ class AppResign {
         }
         arguments.append(file)
         
-        let codesignTask = Task().execute(codesignPath, workingDirectory: nil, arguments: arguments)
+        let codesignTask = Process().execute(codesignPath, workingDirectory: nil, arguments: arguments)
         if let afterFunc = after {
-            afterFunc(file: file, certificate: certificate, entitlements: entitlements, codesignTask: codesignTask)
+            afterFunc(file, certificate, entitlements, codesignTask)
         }
         return codesignTask
     }

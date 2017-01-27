@@ -45,7 +45,7 @@ struct ProvisioningProfile {
     init?(filename: String){
         let securityArgs = ["cms","-D","-i", filename]
         
-        let taskOutput = Task().execute("/usr/bin/security", workingDirectory: nil, arguments: securityArgs)
+        let taskOutput = Process().execute("/usr/bin/security", workingDirectory: nil, arguments: securityArgs)
         if taskOutput.status == 0 {
             
             // here is a bug on macOS
@@ -59,13 +59,13 @@ struct ProvisioningProfile {
                 self.rawXML = taskOutput.output
             }
             
-            if let results = try? PropertyListSerialization.propertyList(from: self.rawXML.data(using: String.Encoding.utf8)!, options: PropertyListSerialization.MutabilityOptions(), format: nil) {
+            if let results = try? PropertyListSerialization.propertyList(from: self.rawXML.data(using: String.Encoding.utf8)!, options: PropertyListSerialization.MutabilityOptions(), format: nil) as AnyObject {
                 
                 if let expirationDate = results.value(forKey: "ExpirationDate") as? Date,
                     let creationDate = results.value(forKey: "CreationDate") as? Date,
                     let name = results.value(forKey: "Name") as? String,
                     let entitlements = results.value(forKey: "Entitlements"),
-                    let applicationIdentifier = entitlements.value(forKey: "application-identifier") as? String,
+                    let applicationIdentifier = (entitlements as AnyObject).value(forKey: "application-identifier") as? String,
                     let periodIndex = applicationIdentifier.characters.index(of: ".") {
                     
                     self.filename = filename
@@ -74,7 +74,7 @@ struct ProvisioningProfile {
                     self.appID = applicationIdentifier.substring(from: applicationIdentifier.index(periodIndex, offsetBy: 1))
                     self.teamID = applicationIdentifier.substring(to: periodIndex)
                     self.name = name
-                    self.entitlements = entitlements
+                    self.entitlements = entitlements as AnyObject?
                     
                 } else {
                     Log("Error processing \(filename.lastPathComponent)")
@@ -96,9 +96,9 @@ struct ProvisioningProfile {
         let mobileProvisionPlist = tempFolder.stringByAppendingPathComponent("mobileprovision.plist")
         do {
             try self.rawXML.write(toFile: mobileProvisionPlist, atomically: false, encoding: String.Encoding.utf8)
-            let plistBuddy = Task().execute("/usr/libexec/PlistBuddy", workingDirectory: nil, arguments: ["-c", "Print :Entitlements", mobileProvisionPlist, "-x"])
+            let plistBuddy = Process().execute("/usr/libexec/PlistBuddy", workingDirectory: nil, arguments: ["-c", "Print :Entitlements", mobileProvisionPlist, "-x"])
             if plistBuddy.status == 0 {
-                return plistBuddy.output
+                return plistBuddy.output as NSString?
             } else {
                 Log("PlistBuddy Failed")
                 Log(plistBuddy.output)

@@ -8,7 +8,7 @@
 
 import Foundation
 
-let argv = Process.arguments
+let argv = CommandLine.arguments
 let appName = argv[0].pathComponents.last!
 LogMode = false
 
@@ -34,7 +34,7 @@ func raw_input(_ prompt: String = "> ") -> String {
     var input: String = ""
     
     while true {
-        let c = Character(UnicodeScalar(UInt32(fgetc(stdin))))
+        let c = Character(UnicodeScalar(UInt32(fgetc(stdin)))!)
         if c == "\n" {
             return input
         } else {
@@ -76,7 +76,7 @@ func mainRoutine(_ input: String, output: String, certificate: String, provProfi
             } else {
                 while true {
                     let r = Int(raw_input())
-                    if r != nil && r >= 0 && r < n {
+                    if (r != nil) && (r! >= 0) && (r! < n) {
                         appResign.curSigningCert = appResign.codesigningCerts[r!]
                         print("Use Certificate: \(appResign.curSigningCert)\n")
                         break
@@ -118,7 +118,7 @@ func mainRoutine(_ input: String, output: String, certificate: String, provProfi
             } else {
                 while true {
                     let r = Int(raw_input())
-                    if r != nil && r >= 0 && r < n {
+                    if r != nil && r! >= 0 && r! < n {
                         profile = appResign.provisioningProfiles[r!]
                         appResign.profileFilename = profile!.filename
                         print("Use Profile: \(profile!.name) (\(profile!.teamID))")

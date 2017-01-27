@@ -1,0 +1,364 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BB36E9011D16C856001B7FDC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB36E9001D16C856001B7FDC /* Foundation.framework */; };
+		BB36E90B1D16C856001B7FDC /* weixinWalk.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB36E90A1D16C856001B7FDC /* weixinWalk.mm */; };
+		BB36E9161D16D0FC001B7FDC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB36E9151D16D0FC001B7FDC /* UIKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		BB36E8FD1D16C856001B7FDC /* weixinWalk.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = weixinWalk.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB36E9001D16C856001B7FDC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BB36E9051D16C856001B7FDC /* control.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = control.txt; path = Package/DEBIAN/control.txt; sourceTree = "<group>"; };
+		BB36E9061D16C856001B7FDC /* control */ = {isa = PBXFileReference; lastKnownFileType = text; name = control; path = Package/DEBIAN/control; sourceTree = "<group>"; };
+		BB36E9081D16C856001B7FDC /* PackageVersion.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PackageVersion.plist; sourceTree = "<group>"; };
+		BB36E9091D16C856001B7FDC /* weixinWalk-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "weixinWalk-Prefix.pch"; sourceTree = "<group>"; };
+		BB36E90A1D16C856001B7FDC /* weixinWalk.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = weixinWalk.mm; sourceTree = "<group>"; };
+		BB36E90F1D16C856001B7FDC /* weixinWalk.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = weixinWalk.plist; path = Package/Library/MobileSubstrate/DynamicLibraries/weixinWalk.plist; sourceTree = "<group>"; };
+		BB36E9151D16D0FC001B7FDC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BB36E8F91D16C856001B7FDC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB36E9161D16D0FC001B7FDC /* UIKit.framework in Frameworks */,
+				BB36E9011D16C856001B7FDC /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BB36E8F31D16C856001B7FDC = {
+			isa = PBXGroup;
+			children = (
+				BB36E9021D16C856001B7FDC /* weixinWalk */,
+				BB36E8FF1D16C856001B7FDC /* Frameworks */,
+				BB36E8FE1D16C856001B7FDC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BB36E8FE1D16C856001B7FDC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BB36E8FD1D16C856001B7FDC /* weixinWalk.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BB36E8FF1D16C856001B7FDC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BB36E9151D16D0FC001B7FDC /* UIKit.framework */,
+				BB36E9001D16C856001B7FDC /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BB36E9021D16C856001B7FDC /* weixinWalk */ = {
+			isa = PBXGroup;
+			children = (
+				BB36E90A1D16C856001B7FDC /* weixinWalk.mm */,
+				BB36E9031D16C856001B7FDC /* Package */,
+				BB36E9071D16C856001B7FDC /* Supporting Files */,
+			);
+			path = weixinWalk;
+			sourceTree = "<group>";
+		};
+		BB36E9031D16C856001B7FDC /* Package */ = {
+			isa = PBXGroup;
+			children = (
+				BB36E9041D16C856001B7FDC /* DEBIAN */,
+				BB36E90C1D16C856001B7FDC /* Library */,
+			);
+			name = Package;
+			sourceTree = "<group>";
+		};
+		BB36E9041D16C856001B7FDC /* DEBIAN */ = {
+			isa = PBXGroup;
+			children = (
+				BB36E9051D16C856001B7FDC /* control.txt */,
+				BB36E9061D16C856001B7FDC /* control */,
+			);
+			name = DEBIAN;
+			sourceTree = "<group>";
+		};
+		BB36E9071D16C856001B7FDC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BB36E9081D16C856001B7FDC /* PackageVersion.plist */,
+				BB36E9091D16C856001B7FDC /* weixinWalk-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BB36E90C1D16C856001B7FDC /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				BB36E90D1D16C856001B7FDC /* MobileSubstrate */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		BB36E90D1D16C856001B7FDC /* MobileSubstrate */ = {
+			isa = PBXGroup;
+			children = (
+				BB36E90E1D16C856001B7FDC /* DynamicLibraries */,
+			);
+			name = MobileSubstrate;
+			sourceTree = "<group>";
+		};
+		BB36E90E1D16C856001B7FDC /* DynamicLibraries */ = {
+			isa = PBXGroup;
+			children = (
+				BB36E90F1D16C856001B7FDC /* weixinWalk.plist */,
+			);
+			name = DynamicLibraries;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		BB36E8FA1D16C856001B7FDC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		BB36E8FC1D16C856001B7FDC /* weixinWalk */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BB36E9121D16C856001B7FDC /* Build configuration list for PBXNativeTarget "weixinWalk" */;
+			buildPhases = (
+				BB36E8F81D16C856001B7FDC /* Sources */,
+				BB36E8F91D16C856001B7FDC /* Frameworks */,
+				BB36E8FA1D16C856001B7FDC /* Headers */,
+				BB36E8FB1D16C856001B7FDC /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = weixinWalk;
+			productName = weixinWalk;
+			productReference = BB36E8FD1D16C856001B7FDC /* weixinWalk.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BB36E8F41D16C856001B7FDC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0800;
+				TargetAttributes = {
+					BB36E8FC1D16C856001B7FDC = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 952J324HNJ;
+					};
+				};
+			};
+			buildConfigurationList = BB36E8F71D16C856001B7FDC /* Build configuration list for PBXProject "weixinWalk" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = BB36E8F31D16C856001B7FDC;
+			productRefGroup = BB36E8FE1D16C856001B7FDC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BB36E8FC1D16C856001B7FDC /* weixinWalk */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BB36E8FB1D16C856001B7FDC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/opt/iOSOpenDev/bin/iosod --xcbp";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BB36E8F81D16C856001B7FDC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB36E90B1D16C856001B7FDC /* weixinWalk.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		BB36E9101D16C856001B7FDC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(iOSOpenDevPath)/frameworks/**",
+					"$(SDKROOT)/System/Library/PrivateFrameworks",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(iOSOpenDevPath)/include/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LIBRARY_SEARCH_PATHS = "$(iOSOpenDevPath)/lib/**";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = NO;
+				iOSOpenDevPath = /opt/iOSOpenDev;
+			};
+			name = Debug;
+		};
+		BB36E9111D16C856001B7FDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(iOSOpenDevPath)/frameworks/**",
+					"$(SDKROOT)/System/Library/PrivateFrameworks",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(iOSOpenDevPath)/include/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LIBRARY_SEARCH_PATHS = "$(iOSOpenDevPath)/lib/**";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				iOSOpenDevPath = /opt/iOSOpenDev;
+			};
+			name = Release;
+		};
+		BB36E9131D16C856001B7FDC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: 1336006643@qq.com (7Z47763Z65)";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "weixinWalk/weixinWalk-Prefix.pch";
+				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				iOSOpenDevBuildPackageOnAnyBuild = NO;
+				iOSOpenDevCopyOnBuild = NO;
+				iOSOpenDevDevice = "";
+				iOSOpenDevInstallOnAnyBuild = NO;
+				iOSOpenDevInstallOnProfiling = YES;
+				iOSOpenDevRespringOnInstall = YES;
+				iOSOpenDevUsePackageVersionPList = YES;
+			};
+			name = Debug;
+		};
+		BB36E9141D16C856001B7FDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: 1336006643@qq.com (7Z47763Z65)";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "weixinWalk/weixinWalk-Prefix.pch";
+				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				iOSOpenDevBuildPackageOnAnyBuild = NO;
+				iOSOpenDevCopyOnBuild = NO;
+				iOSOpenDevDevice = "";
+				iOSOpenDevInstallOnAnyBuild = NO;
+				iOSOpenDevInstallOnProfiling = YES;
+				iOSOpenDevRespringOnInstall = YES;
+				iOSOpenDevUsePackageVersionPList = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BB36E8F71D16C856001B7FDC /* Build configuration list for PBXProject "weixinWalk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB36E9101D16C856001B7FDC /* Debug */,
+				BB36E9111D16C856001B7FDC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BB36E9121D16C856001B7FDC /* Build configuration list for PBXNativeTarget "weixinWalk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB36E9131D16C856001B7FDC /* Debug */,
+				BB36E9141D16C856001B7FDC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BB36E8F41D16C856001B7FDC /* Project object */;
+}

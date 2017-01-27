@@ -27,7 +27,7 @@ struct AppSignerTaskOutput {
     }
 }
 
-extension Task {
+extension Process {
     func launchSyncronous() -> AppSignerTaskOutput {
         self.standardInput = FileHandle.nullDevice
         let pipe = Pipe()

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0810"
+   LastUpgradeVersion = "0800"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BBBFAE211D06B5CD0041F3FB"
-               BuildableName = "AppResign"
-               BlueprintName = "AppResign"
-               ReferencedContainer = "container:AppResign.xcodeproj">
+               BlueprintIdentifier = "BB36E8FC1D16C856001B7FDC"
+               BuildableName = "weixinWalk.dylib"
+               BlueprintName = "weixinWalk"
+               ReferencedContainer = "container:weixinWalk.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,15 +29,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BBBFAE211D06B5CD0041F3FB"
-            BuildableName = "AppResign"
-            BlueprintName = "AppResign"
-            ReferencedContainer = "container:AppResign.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -51,16 +42,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BBBFAE211D06B5CD0041F3FB"
-            BuildableName = "AppResign"
-            BlueprintName = "AppResign"
-            ReferencedContainer = "container:AppResign.xcodeproj">
+            BlueprintIdentifier = "BB36E8FC1D16C856001B7FDC"
+            BuildableName = "weixinWalk.dylib"
+            BlueprintName = "weixinWalk"
+            ReferencedContainer = "container:weixinWalk.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -70,16 +60,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BBBFAE211D06B5CD0041F3FB"
-            BuildableName = "AppResign"
-            BlueprintName = "AppResign"
-            ReferencedContainer = "container:AppResign.xcodeproj">
+            BlueprintIdentifier = "BB36E8FC1D16C856001B7FDC"
+            BuildableName = "weixinWalk.dylib"
+            BlueprintName = "weixinWalk"
+            ReferencedContainer = "container:weixinWalk.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
