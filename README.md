@@ -1,13 +1,25 @@
-# iOSAppHook [![star this repo](http://github-svg-buttons.herokuapp.com/star.svg?user=Urinx&repo=iOSAppHook&style=flat&background=1081C1)](http://github.com/Urinx/iOSAppHook) [![fork this repo](http://github-svg-buttons.herokuapp.com/fork.svg?user=Urinx&repo=iOSAppHook&style=flat&background=1081C1)](http://github.com/Urinx/iOSAppHook/fork) ![platform](https://img.shields.io/badge/platform-Xcode%207.3.1%20&%20iOS%2010-lightgrey.svg) [![download](https://img.shields.io/github/downloads/Urinx/iOSAppHook/total.svg)](https://github.com/Urinx/iOSAppHook/releases)
+# iOSAppHook [![star this repo](http://github-svg-buttons.herokuapp.com/star.svg?user=Urinx&repo=iOSAppHook&style=flat&background=1081C1)](http://github.com/Urinx/iOSAppHook) [![fork this repo](http://github-svg-buttons.herokuapp.com/fork.svg?user=Urinx&repo=iOSAppHook&style=flat&background=1081C1)](http://github.com/Urinx/iOSAppHook/fork) ![platform](https://img.shields.io/badge/platform-Xcode%208.1%20&%20iOS%2010-lightgrey.svg) [![download](https://img.shields.io/github/downloads/Urinx/iOSAppHook/total.svg)](https://github.com/Urinx/iOSAppHook/releases)
 专注于非越狱环境下iOS应用逆向研究，从dylib注入，应用重签名到App Hook。
 
 > 注意！本文所有操作均在以下环境下成功进行，不同平台或环境可能存在某些问题，欢迎大家在[issue](https://github.com/Urinx/iOSAppHook/issues)中提出问题以及相互讨论。
 > 
-> Mac OS X 10.11.6 (15G12a) - macOS Sierra 10.12 beta 7 (16A313a)<br>
-> Xcode 7.3.1 (7D1014) - 8.0 beta 4 (8S188o) <br>
-> iPhone 5s, iOS 9.3.3 (13G21) - iOS 10 beta 7 (14A5346a) <br>
+> Mac OS X 10.11.6 (15G12a) - macOS Sierra 10.12.4 (16E144f)<br>
+> Xcode 7.3.1 (7D1014) - 8.1 (8B62) <br>
+> iPhone 5s, iOS 9.3.3 (13G21) - iOS 10.3 (14E5230e) <br>
 > 免费开发者账号 <br>
-> 示例App：微信 6.3.19.18 - 6.3.24
+> 示例App：微信 6.3.19.18 - 6.5.4
+
+## 目录
+* [前言](#前言)
+* [应用脱壳](#应用脱壳)
+* [应用重签名](#应用重签名)
+* [安装iOSOpenDev](#安装iOSOpenDev)
+* [App Hook](#App Hook)
+* [一个简单的CaptainHook载入Cycript](#一个简单的CaptainHook载入Cycript)
+* [使用Reveal调试微信的App界面](#使用Reveal调试微信的App界面)
+* [后续](#后续)
+* [常见问题](#常见问题)
+* [参考链接](#参考链接)
 
 ## 前言
 提到非越狱环境下`App Hook`大家早就已经耳熟能详，已经有很多大神研究过，这方面相关的资料和文章也能搜到很多。我最早是看到乌云知识库上[蒸米](http://drops.wooyun.org/author/蒸米)的文章才对这方面有所了解，当时就想试试，整个过程看似简单（大神总是一笔带过），然而当自己真正开始动手时一路上遇到各种问题（一脸懵逼），在[iOSRE论坛](http://bbs.iosre.com)上也看到大家遇到的各种问题，其实阻扰大家的主要是一些环境的搭建以及相关配置没设置好，结果导致dylib编译过程各种错误，重签名不成功，各种闪退等。所以本文里的每一步操作都会很详细的交代，确保大家都能操作成功。
@@ -432,6 +444,47 @@ Reveal这个调试应用UI界面的神器这里就不再介绍了，本文所有
 
 ## 后续
 至于之后该做什么，你想干嘛就干嘛。Cycript在手，天下我有，Reveal一出，谁与争锋。你可以使用Class-dump工具dump出应用的头文件，或者是将二进制文件拖到ida或hopper里面反汇编分析，写tweak插件，实现各种姿势抢红包等等，本文就不讨论这些了。
+
+## 常见问题
+
+**1. Invalid or unsupported format for signature**
+
+一般我们拿到越狱脱壳后的应用什么都不做直接重签名后时是可以成功安装的，然而一旦注入dylib之后再进行重签名时就可能遇到此错误，原因一般出在注入dylib过程中。
+
+例如，在国内某助手的越狱应用商店上下载了一个`6.5.3`版本的微信，通过`file`命令可以看到可执行文件里还包含了一个奇葩的`x86_64`指令集（你确定这不是模拟器上跑的）：
+
+```bash
+> file WeChat.app/WeChat
+WeChat.app/WeChat: Mach-O universal binary with 2 architectures: [arm_v7: Mach-O executable arm_v7] [x86_64]
+WeChat.app/WeChat (for architecture armv7): Mach-O executable arm_v7
+WeChat.app/WeChat (for architecture x86_64):    Mach-O 64-bit executable x86_64
+```
+
+挂上dylib后再重签名就报错了：
+
+![problem_0](Screenshot/problem_0.png)
+
+如果用`MachOView`软件看看是否注入成功，可以发现在`x86_64`上出错了。
+
+![problem_1](Screenshot/problem_1.png)
+
+这个不能怪我咯，要怪只能怪`yololib`工具了。
+
+**2. 应用只有一个指令集**
+
+在重签名`3.4.0`版本的`Malody`应用时，通过`file`命令可以看到该执行文件只有一个`armv7`指令集：
+
+```bash
+> file Malody.app/Malody\ Mobile 
+Malody.app/Malody Mobile: Mach-O universal binary with 1 architecture: [arm_v7: Mach-O executable arm_v7]
+Malody.app/Malody Mobile (for architecture armv7):  Mach-O executable arm_v7
+```
+
+如果此时对其重签名则会报如下错误：
+
+![problem_2](Screenshot/problem_2.png)
+
+解决方法是在执行`codesign`命令时需要指定选项`-a armv7`，不然默认的参数是`--all-architectures`。此bug已修复，如遇到此问题，请使用最新版的AppResign。
 
 ## 参考链接
 之前看的都没记录，下列都是后来想到才记下来的。
