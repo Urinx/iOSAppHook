@@ -26,6 +26,11 @@ class AppResign {
     var NibLoaded = false
     var deleteURLSchemes = false
     
+    var appBundlePath: String = ""
+    var appBundleInfoPlist: String = ""
+    var appBundleProvisioningFilePath: String = ""
+    var appBundleExecutable: String = ""
+    
     //MARK: Constants
     let defaults = UserDefaults()
     let fileManager = FileManager.default
@@ -40,6 +45,7 @@ class AppResign {
     let securityPath = "/usr/bin/security"
     let chmodPath = "/bin/chmod"
     let cpPath = "/bin/cp"
+    let fileCmdPath = "/usr/bin/file"
     let plistBuddyPath = "/usr/libexec/PlistBuddy"
     
     init() {
@@ -229,9 +235,9 @@ class AppResign {
                 if !isDirectory.boolValue { continue }
                 
                 // MARK: Bundle variables setup
-                let appBundlePath = payloadDirectory.stringByAppendingPathComponent(file)
-                let appBundleInfoPlist = appBundlePath.stringByAppendingPathComponent("Info.plist")
-                let appBundleProvisioningFilePath = appBundlePath.stringByAppendingPathComponent("embedded.mobileprovision")
+                appBundlePath = payloadDirectory.stringByAppendingPathComponent(file)
+                appBundleInfoPlist = appBundlePath.stringByAppendingPathComponent("Info.plist")
+                appBundleProvisioningFilePath = appBundlePath.stringByAppendingPathComponent("embedded.mobileprovision")
                 let useAppBundleProfile = (provisioningFile == nil && fileManager.fileExists(atPath: appBundleProvisioningFilePath))
                 
                 // MARK: Delete CFBundleResourceSpecification from Info.plist
@@ -289,8 +295,9 @@ class AppResign {
                 }
                 
                 // MARK: Make sure that the executable is well... executable.
-                if let bundleExecutable = getPlistKey(appBundleInfoPlist, keyName: "CFBundleExecutable"){
-                    _ = Process().execute(chmodPath, workingDirectory: nil, arguments: ["755", appBundlePath.stringByAppendingPathComponent(bundleExecutable)])
+                if let bundleExecutable = getPlistKey(appBundleInfoPlist, keyName: "CFBundleExecutable") {
+                    appBundleExecutable = appBundlePath.stringByAppendingPathComponent(bundleExecutable)
+                    _ = Process().execute(chmodPath, workingDirectory: nil, arguments: ["755", appBundleExecutable])
                 }
                 
                 // MARK: Change Application ID
@@ -536,7 +543,7 @@ class AppResign {
     }
     
     // MARK: Codesigning
-    func codeSign(_ file: String, certificate: String, entitlements: String?,before:((_ file: String, _ certificate: String, _ entitlements: String?)->Void)?, after: ((_ file: String, _ certificate: String, _ entitlements: String?, _ codesignTask: AppSignerTaskOutput)->Void)?) ->AppSignerTaskOutput{
+    func codeSign(_ file: String, certificate: String, entitlements: String?, before: ((_ file: String, _ certificate: String, _ entitlements: String?)->Void)?, after: ((_ file: String, _ certificate: String, _ entitlements: String?, _ codesignTask: AppSignerTaskOutput)->Void)?) -> AppSignerTaskOutput {
         
         let useEntitlements: Bool = ({
             if entitlements == nil {
@@ -555,6 +562,22 @@ class AppResign {
         }
         
         var arguments = ["-vvv","-fs",certificate,"--no-strict"]
+        
+        // bugfix: for there has only one architecture
+        // specified architecture
+        if file.hasSuffix(".app") {
+            let fileTask = Process().execute(fileCmdPath, workingDirectory: nil, arguments: [appBundleExecutable])
+            let pattern = "for architecture (\\w+)"
+            let regex = try! NSRegularExpression(pattern: pattern, options: .caseInsensitive)
+            let res = regex.matches(in: fileTask.output, options: [], range: NSMakeRange(0, fileTask.output.characters.count))
+            
+            if res.count == 1 {
+                arguments.append("-a")
+                let arch = (fileTask.output as NSString).substring(with: res[0].rangeAt(1))
+                arguments.append(arch)
+            }
+        }
+        
         if useEntitlements {
             arguments.append("--entitlements=\(entitlements!)")
         }

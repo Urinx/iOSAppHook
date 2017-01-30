@@ -13,6 +13,7 @@ let appName = argv[0].pathComponents.last!
 LogMode = false
 
 func Usage() {
+    print("Version: 2.2.1\n")
     print("Usage:")
     print("./\(appName) [-options] [INPUT] [OUTPUT]")
     print("\nOptions:")
