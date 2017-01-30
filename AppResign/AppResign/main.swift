@@ -30,19 +30,26 @@ func Usage() {
     exit(1)
 }
 
+// deprecated
+//func raw_input(_ prompt: String = "> ") -> String {
+//    print(prompt, terminator:"")
+//    var input: String = ""
+//    
+//    while true {
+//        let c = Character(UnicodeScalar(UInt32(fgetc(stdin)))!)
+//        if c == "\n" {
+//            return input
+//        } else {
+//            input.append(c)
+//        }
+//    }
+//}
+
 func raw_input(_ prompt: String = "> ") -> String {
     print(prompt, terminator:"")
-    var input: String = ""
-    
-    while true {
-        let c = Character(UnicodeScalar(UInt32(fgetc(stdin)))!)
-        if c == "\n" {
-            return input
-        } else {
-            input.append(c)
-        }
-    }
+    return readLine(strippingNewline: true) ?? ""
 }
+
 
 func mainRoutine(_ input: String, output: String, certificate: String, provProfile: String, bundleId: String, displayName: String) {
     let support = ["deb", "ipa", "app", "xcarchive"]
