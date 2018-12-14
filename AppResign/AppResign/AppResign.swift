@@ -433,6 +433,8 @@ class AppResign {
                 
                 
                 recursiveDirectorySearch(appBundlePath, extensions: signableExtensions, found: signingFunction)
+                hiddenDylibSearch(appBundlePath, found: signingFunction)
+                
                 signingFunction(appBundlePath)
                 
                 // MARK: Codesigning - Verification
@@ -538,6 +540,28 @@ class AppResign {
                     found(currentFile)
                 }
                 
+            }
+        }
+    }
+    
+    func hiddenDylibSearch(_ path: String, found: ((_ file: String) -> Void)){
+        
+        if let files = try? fileManager.contentsOfDirectory(atPath: path) {
+            var isDirectory: ObjCBool = true
+            
+            for file in files {
+                let currentFile = path.stringByAppendingPathComponent(file)
+                fileManager.fileExists(atPath: currentFile, isDirectory: &isDirectory)
+                if !isDirectory.boolValue {
+                    let fileTask = Process().execute(fileCmdPath, workingDirectory: nil, arguments: [currentFile])
+                    let pattern = "dynamically linked shared library"
+                    let regex = try! NSRegularExpression(pattern: pattern, options: .caseInsensitive)
+                    let res = regex.matches(in: fileTask.output, options: [], range: NSMakeRange(0, fileTask.output.characters.count))
+                    if res.count > 0 && file.pathExtension != "dylib" {
+                        print("find hidden dylib \(file)")
+                        found(currentFile)
+                    }
+                }
             }
         }
     }
